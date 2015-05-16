@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Subrename.h"
 #include <QMessageBox>
 SubRename::SubRename(QWidget *parent)
@@ -45,17 +45,17 @@ void SubRename::OnRename()
     QString sSecondExtenstion = sSecondFileName.split(".").takeLast();
     sFirstFile.replace(sFirstExtenstion,sSecondExtenstion);
 
-    QString sMsg = QString("Change %1 to %2 ?").arg(sSecondFile).arg(sFirstFile);
-    if(QMessageBox::question(this,"",sMsg) != QMessageBox::Yes)
-    {
-        return;
-    }
-/*
+ 
+
     if(ui.chkConfirm->checkState() == Qt::Checked)
     {
-
+		QString sMsg = QString("Change %1 to %2 ?").arg(sSecondFile).arg(sFirstFile);
+		if(QMessageBox::question(this,"",sMsg) != QMessageBox::Yes)
+		{
+			return;
+		}
     }
-*/
+
     QFile oFile(sSecondFile);
 
 
