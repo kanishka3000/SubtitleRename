@@ -7,41 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sub Title Rename</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
      <widget class="QPushButton" name="btnOpen">
       <property name="text">
        <string>Open</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QListView" name="listFilms"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QListView" name="listSubs"/>
-    </item>
-    <item row="1" column="2">
-     <widget class="QPushButton" name="pushButton">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Rename</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
+    <item>
      <widget class="QCheckBox" name="chkConfirm">
       <property name="text">
        <string>Confirmation</string>
@@ -49,6 +30,73 @@
       <property name="checked">
        <bool>true</bool>
       </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QListView" name="listFilms"/>
+      </item>
+      <item>
+       <widget class="QListView" name="listSubs"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Rename</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="txtSource"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="btnSource">
+           <property name="text">
+            <string>Source</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="txtDest"/>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="btnDest">
+           <property name="text">
+            <string>Destination</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btncopy">
+         <property name="text">
+          <string>Copy</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="prog_progress">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
