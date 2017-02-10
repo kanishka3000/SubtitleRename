@@ -23,22 +23,58 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="chkConfirm">
-      <property name="text">
-       <string>Confirmation</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="chkConfirm">
+        <property name="text">
+         <string>Confirmation</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>From Extension</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_FromExt">
+        <property name="text">
+         <string>*.mkv</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>To Extension</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txt_ToExt">
+        <property name="text">
+         <string>*.sub</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_Auto">
+        <property name="text">
+         <string>Auto Rename</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QListView" name="listFilms"/>
-      </item>
-      <item>
-       <widget class="QListView" name="listSubs"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -52,6 +88,9 @@
          <string>Rename</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QListView" name="listSubs"/>
       </item>
      </layout>
     </item>
@@ -129,8 +168,8 @@
    <slot>OnRename()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>590</x>
-     <y>31</y>
+     <x>336</x>
+     <y>101</y>
     </hint>
     <hint type="destinationlabel">
      <x>790</x>
@@ -138,9 +177,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_Auto</sender>
+   <signal>clicked()</signal>
+   <receiver>SubRenameClass</receiver>
+   <slot>onAuto()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>533</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>645</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnButtonClick()</slot>
   <slot>OnRename()</slot>
+  <slot>onAuto()</slot>
  </slots>
 </ui>

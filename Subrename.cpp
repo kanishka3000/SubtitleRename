@@ -52,28 +52,9 @@ void SubRename::OnRename()
     QModelIndex oSecondIndex = ui.listSubs->selectionModel()->selectedIndexes().at(0);
     QString sSecondFileName = oModel.fileName(oSecondIndex);
     QString sSecondFile = oModel.filePath(oSecondIndex);
-    QString sFirstExtenstion = sFirstFile.split(".").takeLast();
-    QString sSecondExtenstion = sSecondFileName.split(".").takeLast();
-    sFirstFile.replace(sFirstExtenstion,sSecondExtenstion);
-
- 
-
-    if(ui.chkConfirm->checkState() == Qt::Checked)
-    {
-		QString sMsg = QString("Change %1 to %2 ?").arg(sSecondFile).arg(sFirstFile);
-		if(QMessageBox::question(this,"",sMsg) != QMessageBox::Yes)
-		{
-			return;
-		}
-    }
-
-    QFile oFile(sSecondFile);
 
 
-
-    oFile.rename(sFirstFile);
-
-
+    renameFile(sFirstFile, sSecondFile, sSecondFileName);
 }
 
 void SubRename::onSource()
@@ -95,7 +76,47 @@ void SubRename::onCopy()
     std::list<Info> lstNames;
     p_finder->getAllFiles(qPrintable(s_source), lstNames);
      ui.prog_progress->setMaximum(lstNames.size());
-    p_copier->copy(s_dest, lstNames, this);
+     p_copier->copy(s_dest, lstNames, this);
+}
+
+void SubRename::onAuto()
+{
+    if(ui.txt_FromExt->text() == "" || ui.txt_ToExt->text() == "")
+    {
+        QMessageBox::information(this, "Empty", "Extension Empty");
+        return;
+    }
+
+    QDir oMovieFiles(s_Dir);
+
+    QString sFromExt = ui.txt_FromExt->text();
+
+    QFileInfoList oMovies = oMovieFiles.entryInfoList(QStringList(ui.txt_FromExt->text()),
+                                                      QDir::NoFilter, QDir::Name);
+
+    QFileInfoList oSubs = oMovieFiles.entryInfoList(QStringList(ui.txt_ToExt->text()),
+                                                    QDir::NoFilter, QDir::Name);
+
+
+
+    if(oMovies.size() != oSubs.size())
+    {
+        QMessageBox::information(this, "Unequal size", "Unequal size");
+    }
+    QFileInfoList::iterator itrMov = oMovies.begin();
+    QFileInfoList::iterator itrSubs = oSubs.begin();
+
+    for(; itrMov != oMovies.end(); itrMov++, itrSubs++)
+    {
+        QFileInfo oMovFile = *itrMov;
+        QFileInfo oSubFile = *itrSubs;
+        QString sfirstFile = oMovFile.filePath();
+        QString ssecondFile = oSubFile.fileName();
+        QString ssecondPath = oSubFile.filePath();
+
+        renameFile(sfirstFile, ssecondPath, ssecondFile);
+    }
+
 }
 
 bool SubRename::getDirectoyPath(QLineEdit *lineEdit, QString ssettingsName, QString &spath)
@@ -118,6 +139,26 @@ bool SubRename::getDirectoyPath(QLineEdit *lineEdit, QString ssettingsName, QStr
         spath = path;
 
         return true;
+}
+
+void SubRename::renameFile(QString sFirstFile, QString ssecondFile , QString sSecondFileName)
+{
+    QString sFirstExtenstion = sFirstFile.split(".").takeLast();
+    QString sSecondExtenstion = sSecondFileName.split(".").takeLast();
+    sFirstFile.replace(sFirstExtenstion,sSecondExtenstion);
+
+    if(ui.chkConfirm->checkState() == Qt::Checked)
+    {
+        QString sMsg = QString("Change %1 to %2 ?").arg(sSecondFileName).arg(sFirstFile);
+        if(QMessageBox::question(this,"",sMsg) != QMessageBox::Yes)
+        {
+            return;
+        }
+    }
+
+    QFile oFile(ssecondFile);
+
+    oFile.rename(sFirstFile);
 }
 
 

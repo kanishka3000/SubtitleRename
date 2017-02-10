@@ -20,8 +20,10 @@ public:
         void onSource();
         void onDest();
         void onCopy();
+        void onAuto();
 private:
     bool getDirectoyPath(QLineEdit* lineEdit, QString ssettingsName, QString& spath);
+    void renameFile(QString sFirstFile, QString ssecondFile, QString sSecondFileName);
 	Ui::SubRenameClass ui;
 	QFileSystemModel oModel;
 	QFileDialog oDialog;
